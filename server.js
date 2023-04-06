@@ -21,7 +21,7 @@ const meriFileSetting = multer.diskStorage({
 
 
 
-        let path = './server/my-uploads/'+req.body.name;
+        let path = './my-uploads/'+req.body.name;
         
         let folderParaHua = fs.existsSync(path);
 
@@ -107,7 +107,7 @@ meriApp.put('/user-update', function(req, res){
 
     let user = users[userIndex];
 
-    fs.renameSync('./server/my-uploads/'+user.name, './server/my-uploads/'+req.body.name);
+    fs.renameSync('./my-uploads/'+user.name, './my-uploads/'+req.body.name);
 
 
     users[userIndex] = req.body;
@@ -129,7 +129,7 @@ meriApp.delete('/user-delete', function(req, res){
 
     let user = users.find(user=>user.id == req.query.anc);
 
-    fs.rmSync('./server/my-uploads/'+user.name, { recursive: true, force: true });
+    fs.rmSync('./my-uploads/'+user.name, { recursive: true, force: true });
         
     users = users.filter(user=>user.id != req.query.anc);
     res.json({success:true})
@@ -164,19 +164,19 @@ meriApp.get('/abc', function(reqeust, response){
         name:"khurram",
         city:"FSD"
     });
-    // response.sendfile('./server/data.jpg');
+    // response.sendfile('./ /data.jpg');
     // response.end("haha")
 });
 
-meriApp.use(myExpress.static('./server/build'))
-meriApp.use(myExpress.static('./server/my-uploads'));
+meriApp.use(myExpress.static('./build'))
+meriApp.use(myExpress.static('./my-uploads'));
 
 meriApp.use(function(err, req, res, cb){
     res.status(500).json(err);
 })
 
 meriApp.listen(3002, function(){
-    console.log("server chaling now");
+    console.log("chaling now");
 })
 
 // let data = require('./cooking');
